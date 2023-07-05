@@ -44,6 +44,7 @@
     "ui5-task-zipper": "^0.5.1"
   },
   "scripts": {
+    "cds-build": "cds build --production",
     "test": "jest",
     "----------------------": "",
     "-Local/Hybrid-Testing-": "",

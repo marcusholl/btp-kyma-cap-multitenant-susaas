@@ -44,6 +44,7 @@
     "ui5-task-zipper": "^0.5.1"
   },
   "scripts": {
+    "build": "echo 'THIS IS THE BUILD'",
     "cds-build": "cds build --production",
     "test": "jest",
     "----------------------": "",
@@ -266,7 +267,7 @@
         }
       },
       "db": {
-        "kind": "sql",
+        "kind": "sql-mt",
         "[local-with-mtx]": {
           "kind": "sql-mt"
         }

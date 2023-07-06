@@ -26,5 +26,8 @@ steps:
   # custom additions
   buildExecute:
     npmRunScripts: [ 'cds-build' ]
+  pipelineStashFilesAfterBuild:
+    stashIncludes:
+      buildResult: '**/*'
     
 

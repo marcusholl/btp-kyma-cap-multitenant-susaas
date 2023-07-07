@@ -7,9 +7,8 @@ stages:
   Build:
     mavenExecuteStaticCodeChecks: false
     npmExecuteLint: false
-  "Container Image Build and Deploy":
+  Container Build:
     stashContent: [ buildResult ]
-
   Additional Unit Tests:
     npmExecuteScripts: false
   Acceptance:

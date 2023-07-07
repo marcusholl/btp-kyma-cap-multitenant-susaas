@@ -23,11 +23,26 @@ steps:
   cloudFoundryDeploy:
     mtaDeployParameters: "-f --version-rule ALL"
 
-  # custom additions
+  # custom additions to make nom build work 
   buildExecute:
     npmRunScripts: [ 'cds-build' ]
   pipelineStashFilesAfterBuild:
     stashIncludes:
       buildResult: '**/*'
+
+  # cnbBuild config
+  cnbBuild:
+    dockerConfigJSON: docker-config
+    containerRegistryUrl: concise.common.repositories.cloud.sap
+    containerImageTag: latest
+    multipleImages:
+      - path: gen/srv
+        containerImageName: susaas-srv
+      - path: gen/api
+        containerImageName: susaas-api
+      - path: broker
+        containerImageName: broker
+
+
     
 

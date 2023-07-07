@@ -45,7 +45,7 @@
   },
   "scripts": {
     "build": "echo 'THIS IS THE BUILD'",
-    "cds-build": "cds build --production",
+    "cds-build": "npm install --include=dev && cds build --production",
     "test": "jest",
     "----------------------": "",
     "-Local/Hybrid-Testing-": "",

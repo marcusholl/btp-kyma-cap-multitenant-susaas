@@ -26,10 +26,11 @@ steps:
   # custom additions to make nom build work 
   buildExecute:
     npmRunScripts: [ 'cds-build' ]
+
   pipelineStashFilesAfterBuild:
     stashIncludes:
       buildResult: '**/*'
-
+      npmInstall: false
   # cnbBuild config
   cnbBuild:
     dockerConfigJSON: docker-config

@@ -8,7 +8,8 @@ stages:
     mavenExecuteStaticCodeChecks: false
     npmExecuteLint: false
   Container Build:
-    stashContent: [ buildResult ]
+    stashContent: [ "buildResult" ]
+    verbose: true
   Additional Unit Tests:
     npmExecuteScripts: false
   Acceptance:

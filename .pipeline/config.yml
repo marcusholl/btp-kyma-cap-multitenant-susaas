@@ -47,6 +47,8 @@ steps:
         containerImageName: susaas-api
       - path: broker
         containerImageName: broker
+  dockerExecuteOnKubernetes:
+    stashContent: [ "buildResult" ]
 
 
 

@@ -8,6 +8,7 @@ stages:
     mavenExecuteStaticCodeChecks: false
     npmExecuteLint: false
   Container Build:
+    # that has no effect:
     stashContent: [ "buildResult" ]
     verbose: true
   Additional Unit Tests:
@@ -37,18 +38,16 @@ steps:
 
   # cnbBuild config
   cnbBuild:
-    dockerConfigJSON: docker-config
+    dockerConfigJsonCredentialsId: docker-config
     containerRegistryUrl: concise.common.repositories.cloud.sap
     containerImageTag: latest
     multipleImages:
       - path: gen/srv
-        containerImageName: susaas-srv
+        containerImageName: susaas-images/susaas-srv
       - path: gen/api
-        containerImageName: susaas-api
+        containerImageName: susaas-image/usaas-api
       - path: broker
-        containerImageName: broker
-  dockerExecuteOnKubernetes:
-    stashContent: [ "buildResult" ]
+        containerImageName: susaas-image/broker
 
 
 

@@ -7,6 +7,9 @@ stages:
   Build:
     mavenExecuteStaticCodeChecks: false
     npmExecuteLint: false
+  "Container Image Build and Deploy":
+    stashContent: [ buildResult ]
+
   Additional Unit Tests:
     npmExecuteScripts: false
   Acceptance:
@@ -26,11 +29,12 @@ steps:
   # custom additions to make nom build work 
   buildExecute:
     npmRunScripts: [ 'cds-build' ]
+    npmInstall: false
 
   pipelineStashFilesAfterBuild:
     stashIncludes:
       buildResult: '**/*'
-      npmInstall: false
+
   # cnbBuild config
   cnbBuild:
     dockerConfigJSON: docker-config
@@ -43,6 +47,7 @@ steps:
         containerImageName: susaas-api
       - path: broker
         containerImageName: broker
+
 
 
     

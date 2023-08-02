@@ -31,6 +31,7 @@ steps:
   buildExecute:
     npmRunScripts: [ 'cds-build' ]
     npmInstall: false
+    cnbBuild: true
 
   pipelineStashFilesAfterBuild:
     stashIncludes:

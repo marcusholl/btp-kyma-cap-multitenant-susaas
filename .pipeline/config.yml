@@ -50,7 +50,9 @@ steps:
       - path: broker
         containerImageName: susaas-image/broker
 
-
+  # helmExecute config
+  helmExecute:
+    chartPath:  charts/sustainable-saas/
 
     
 

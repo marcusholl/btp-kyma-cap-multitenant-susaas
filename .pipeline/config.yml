@@ -32,7 +32,7 @@ steps:
     npmRunScripts: [ 'cds-build' ]
     npmInstall: false
     cnbBuild: true
-    helmExecute: true
+    kubernetesDeploy: true
 
   pipelineStashFilesAfterBuild:
     stashIncludes:

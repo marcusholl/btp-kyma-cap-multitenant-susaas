@@ -56,7 +56,7 @@ steps:
     deployTool: helm3
     deploymentName: mh-deployment-01
     chartPath:  charts/sustainable-saas/
-    containerRegistryUrl: concise.common.repositories.cloud.sap
+    containerRegistryUrl: https://concise.common.repositories.cloud.sap
 
     
 

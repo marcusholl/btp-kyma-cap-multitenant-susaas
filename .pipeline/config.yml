@@ -51,8 +51,10 @@ steps:
       - path: broker
         containerImageName: susaas-image/broker
 
-  # helmExecute config
-  helmExecute:
+  # kubernetesDeploy config
+  kubernetesDeploy:
+    deployTool: helm3
+    deploymentName: mh-deployment-01
     chartPath:  charts/sustainable-saas/
 
     

@@ -58,6 +58,7 @@ steps:
     chartPath:  charts/sustainable-saas/
     containerRegistryUrl: https://concise.common.repositories.cloud.sap
     kubeConfigFileCredentialsId: kube-config
+    verbose: true
     imageNames:
       - susaas-image/susaas-srv
       - susaas-image/usaas-api

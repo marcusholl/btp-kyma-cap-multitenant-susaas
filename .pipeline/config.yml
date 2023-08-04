@@ -57,6 +57,7 @@ steps:
     deploymentName: mh-deployment-01
     chartPath:  charts/sustainable-saas/
     containerRegistryUrl: https://concise.common.repositories.cloud.sap
+    kubeConfigFileCredentialsId: kube-config
     imageNames:
       - susaas-image/susaas-srv
       - susaas-image/usaas-api

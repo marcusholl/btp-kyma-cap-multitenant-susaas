@@ -50,8 +50,6 @@ steps:
         containerImageName: susaas-image/usaas-api
       - path: broker
         containerImageName: susaas-image/broker
-      - path: db-com
-        containerImageName: susaas-image/db
 
   # kubernetesDeploy config
   kubernetesDeploy:
@@ -66,7 +64,6 @@ steps:
       - susaas-image/susaas-srv
       - susaas-image/usaas-api
       - susaas-image/broker
-      - susaas-image/db
     imageNameTags:
       - latest
       - latest

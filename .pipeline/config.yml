@@ -61,7 +61,7 @@ steps:
     chartPath:  charts/sustainable-saas/
     containerRegistryUrl: https://concise.common.repositories.cloud.sap
     kubeConfigFileCredentialsId: kube-config
-    containerRegistrySecret=concise
+    containerRegistrySecret: concise
     verbose: true
     namespace: mh-01
 

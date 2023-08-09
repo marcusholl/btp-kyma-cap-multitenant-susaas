@@ -62,16 +62,6 @@ steps:
     kubeConfigFileCredentialsId: kube-config
     verbose: true
     namespace: mh-01
-    imageNames:
-      - susaas-image/susaas-srv
-      - susaas-image/usaas-api
-      - susaas-image/broker
-      - susaas-image/db-com
-    imageNameTags:
-      - latest
-      - latest
-      - latest
-      - latest
 
     
 

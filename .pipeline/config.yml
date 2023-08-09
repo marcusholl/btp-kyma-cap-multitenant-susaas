@@ -65,7 +65,7 @@ steps:
     verbose: true
     namespace: mh-01
     valuesMapping:
-      api.image.tag=image.susaas_image/usaas_api.tag
+      api.image.tag: image.susaas_image/usaas_api.tag
 
     
 

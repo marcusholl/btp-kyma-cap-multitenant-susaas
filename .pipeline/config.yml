@@ -21,6 +21,7 @@ stages:
   Release:
     cloudFoundryDeploy: false
     tmsUpload: false
+    kubernetesDeploy: true
 steps:
   artifactPrepareVersion:
     versioningType: "cloud_noTag"

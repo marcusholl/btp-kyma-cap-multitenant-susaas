@@ -53,6 +53,8 @@ steps:
         containerImageName: susaas-image/broker
       - path: gen/db-com
         containerImageName: susaas-image/db-com
+      - path: gen/router
+        containerImageName: susaas-image/router
 
   # kubernetesDeploy config
   kubernetesDeploy:

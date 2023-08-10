@@ -62,6 +62,7 @@ steps:
     containerRegistryUrl: https://concise.common.repositories.cloud.sap
     kubeConfigFileCredentialsId: kube-config
     containerRegistrySecret: concise
+    stashContent: source
     verbose: true
     namespace: mh-01
     helmDeployWaitSeconds: 600

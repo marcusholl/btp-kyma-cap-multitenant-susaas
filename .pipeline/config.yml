@@ -74,6 +74,6 @@ steps:
       srv.image.tag:           image.susaas_images/susaas_srv.tag
       broker.image.repository: image.susaas_image/broker.repository
       broker.image.tag:        image.susaas_image/broker.tag
-
+      global.imagePullSecret.name: imagePullSecrets[0].name
     
 

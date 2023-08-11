@@ -29,7 +29,7 @@ steps:
   cloudFoundryDeploy:
     mtaDeployParameters: "-f --version-rule ALL"
 
-  # custom additions to make nom build work 
+  # custom additions to make nom build work
   buildExecute:
     npmRunScripts: [ 'cds-build' ]
     npmInstall: false
@@ -79,12 +79,12 @@ steps:
       broker.image.repository: image.susaas_image/broker.repository
       broker.image.tag:        image.susaas_image/broker.tag
       global.imagePullSecret.name: imagePullSecrets[0].name
-   
+
   helmExecute:
     helmCommand: dependency
     dependency: update
     templateStartDelimiter: '[['
     templateEndDelimiter: ']]'
- 
+
   dockerExecuteOnKubernetes:
     verbose: true

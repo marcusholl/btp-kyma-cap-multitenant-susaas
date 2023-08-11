@@ -68,7 +68,7 @@ steps:
       - source
     verbose: true
     namespace: mh-01
-    helmDeployWaitSeconds: 3000
+    helmDeployWaitSeconds: 600
     valuesMapping:
       api.image.repository:    image.susaas_image/usaas_api.repository
       api.image.tag:           image.susaas_image/usaas_api.tag

@@ -1,6 +1,6 @@
 global:
   imagePullSecret: {}
-  domain: ee92870.kyma.shoot.live.k8s-hana.ondemand.com # see domain in Config Map kube-system/shoot-info or custom domain (e.g. sap-demo.com) 
+  domain: ee92870.kyma.shoot.live.k8s-hana.ondemand.com # see domain in Config Map kube-system/shoot-info or custom domain (e.g. sap-demo.com)
   shootName: ee92870 # see shootName in Config Map kube-system/shoot-info
   gateway: # use default value (kyma-system/kyma-gateway) or custom gateway (e.g. susaas/demo-gateway)
   # If necessary, override essential dependencies required in subcharts
@@ -54,20 +54,20 @@ srv:
       serviceInstanceName: sm-admin
     saas-registry:
       serviceInstanceName: saas-registry
-    destination: 
+    destination:
       serviceInstanceName: destination
-    hana: 
+    hana:
       serviceInstanceName: com-hdi-container
     html5-apps-repo:
       serviceInstanceName: html5-repo-runtime
     alert-notification:
       # Only enable if Alert Notification Service instance is available in namespace
-      enabled: true 
+      enabled: true
       # As Alert Notification is unique per namespace, serviceInstanceFullname is used
       serviceInstanceFullname: alert-notification
     identity:
-      # Only enable if Cloud Identity Service instance is enabled in Umbrella Chart 
-      enabled: false 
+      # Only enable if Cloud Identity Service instance is enabled in Umbrella Chart
+      enabled: false
       serviceInstanceName: identity
       # SAP IAS binding requires X.509 certificate based credentials
       parameters:
@@ -118,11 +118,11 @@ api:
     # Provide details of the API XSUAA Service Instance
     # Those details can be found in the respective Kyma Secret
     # The Secret is created for the xsuaa-apim serviceKey
-    xsuaa: 
+    xsuaa:
       # Provide the XSUAA tenant host without https://
       # e.g., sap-demo.authentication.us20.hana.ondemand.com
       host: sap-demo.authentication.us20.hana.ondemand.com
-      # Provide the xsappname of your API XSUAA Service Instance 
+      # Provide the xsappname of your API XSUAA Service Instance
       # Add the prefix "sb-" to the xsappname like, sb-susaas-api-default
       sub: sb-susaas-api-default
   resources:
@@ -154,17 +154,17 @@ broker:
       ephemeral-storage: 1G
       cpu: 100m
       memory: 500M
-  config: 
+  config:
     # Leave empty to generate new ID on Helm installation
     # ! Should be static in productive scenarios !
-    serviceId: 
+    serviceId:
     displayName: Sustainable SaaS API
     plans:
       - name: default
         description: Standard Plan
         # Leave empty to generate new ID on Helm installation
         # ! Should be static in productive scenarios !
-        planId:  
+        planId:
       - name: premium
         description: Premium Plan
         # Leave empty to generate new ID on Helm installation
@@ -227,23 +227,23 @@ xsuaa:
     xsappname: '{{.Release.Name}}-{{.Release.Namespace}}'
     tenant-mode: shared
     # Role collections names have to be unique in the same subaccount
-    # Therefore a unique identifer has to be utilized 
+    # Therefore a unique identifer has to be utilized
     role-collections:
       - name: 'Susaas Member ({{.Release.Name}}-{{.Release.Namespace}})'
         description: Member Access
-        role-template-references: 
+        role-template-references:
           - '$XSAPPNAME.Member'
           - '$XSAPPNAME.Token_Exchange'
       - name: 'Susaas Administrator ({{.Release.Name}}-{{.Release.Namespace}})'
         description: Administrator Access
-        role-template-references: 
+        role-template-references:
           - '$XSAPPNAME.Admin'
           - '$XSAPPNAME.SaaSAdmin'
           - '$XSAPPNAME.UserManagementAdmin'
           - '$XSAPPNAME.Token_Exchange'
       - name: 'Susaas Extension Developer ({{.Release.Name}}-{{.Release.Namespace}})'
         description: Extension Developer Access
-        role-template-references: 
+        role-template-references:
           - '$XSAPPNAME.ExtensionDeveloper'
           - '$XSAPPNAME.Token_Exchange'
   # Rest of the configuration settings (Scopes, Role Templates) in json file
@@ -265,7 +265,7 @@ xsuaa_api:
         name: $XSAPPNAME.trial_default
       - description: Premium Plan
         name: $XSAPPNAME.plan_premium
-  
+
 
 # SAP Software-as-a-Service Registry
 # Required to connect SaaS application with SAP BTP SaaS registry
@@ -273,7 +273,7 @@ xsuaa_api:
 saas_registry:
   serviceOfferingName: saas-registry
   servicePlanName: application
-  # Parameters allow us to modify the subscription process 
+  # Parameters allow us to modify the subscription process
   # The following setup provides an option to define a custom domain
   parameters:
     appPlans:
@@ -284,7 +284,7 @@ saas_registry:
       - description: Sustainable SaaS premium plan
         name: premium
     propagateParams: true
-    paramsSchema: 
+    paramsSchema:
       schemas:
         subscription:
           create:
@@ -297,11 +297,11 @@ saas_registry:
                   type: string
                   title: Custom Subdomain
                   description: >-
-                    Provide a custom subdomain for this subscription instance. This subdomain will be used instead of the default 
-                    <SubaccountSubdomain>-<ReleaseName>-router-<Namespace> pattern. Please make sure to use unique subdomains only! 
+                    Provide a custom subdomain for this subscription instance. This subdomain will be used instead of the default
+                    <SubaccountSubdomain>-<ReleaseName>-router-<Namespace> pattern. Please make sure to use unique subdomains only!
 
 
-# SAP Destination Service 
+# SAP Destination Service
 # Used to centrally store destinations of the SaaS application
 destination:
   serviceOfferingName: destination
@@ -362,7 +362,7 @@ html5_repo_host:
 
 
 # SAP HTML5 Application Repository
-# Allows access to the SaaS applicaiton UI modules 
+# Allows access to the SaaS applicaiton UI modules
 html5_repo_runtime:
   serviceOfferingName: html5-apps-repo
   servicePlanName: app-runtime
@@ -381,7 +381,7 @@ identity:
       # Redirect and logout URIs filled with dummy values as not required for authentication
       redirect-uris:
         - 'https://*.{{ include "cap.deploymentHostFull" ( merge ( dict "name" "router" "deployment" .Values.router ) . ) }}/login/callback?authType=ias'
-      post-logout-redirect-uris: 
+      post-logout-redirect-uris:
         - 'https://*.{{ include "cap.deploymentHostFull" ( merge ( dict "name" "router" "deployment" .Values.router ) . ) }}/logout/**'
       grant-types: ["authorization_code"]
       credential-types: ["binding-secret", "x509"]

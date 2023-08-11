@@ -82,6 +82,8 @@ steps:
     helmCommand: dependency
     dependency: update
     chartPath:  charts/sustainable-saas/
+    templateStartDelimiter: '[['
+    templateEndDelimiter: ']]'
  
   dockerExecuteOnKubernetes:
     verbose: true

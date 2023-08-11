@@ -22,6 +22,7 @@ stages:
     cloudFoundryDeploy: false
     tmsUpload: false
     kubernetesDeploy: true
+    chartPath: charts/sustainable-saas/
 steps:
   artifactPrepareVersion:
     versioningType: "cloud_noTag"

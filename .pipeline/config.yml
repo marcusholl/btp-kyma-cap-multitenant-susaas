@@ -61,7 +61,6 @@ steps:
       - --debug
     deployTool: helm3
     deploymentName: mh-deployment-01
-    chartPath:  charts/sustainable-saas/
     containerRegistryUrl: https://concise.common.repositories.cloud.sap
     kubeConfigFileCredentialsId: kube-config
     containerRegistrySecret: concise
@@ -84,7 +83,6 @@ steps:
   helmExecute:
     helmCommand: dependency
     dependency: update
-    chartPath:  charts/sustainable-saas/
     templateStartDelimiter: '[['
     templateEndDelimiter: ']]'
  

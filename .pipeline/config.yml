@@ -44,7 +44,7 @@ steps:
   cnbBuild:
     dockerConfigJsonCredentialsId: docker-config
     containerRegistryUrl: concise.common.repositories.cloud.sap
-    containerImageTag: latest
+    containerImageTag: mhlatest
     multipleImages:
       - path: gen/srv
         containerImageName: susaas-images/susaas-srv

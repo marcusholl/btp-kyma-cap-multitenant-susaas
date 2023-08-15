@@ -82,8 +82,8 @@ steps:
   helmExecute:
     helmCommand: dependency
     dependency: update
-    xtemplateStartDelimiter: '[['
-    xtemplateEndDelimiter: ']]'
+    templateStartDelimiter: '[['
+    templateEndDelimiter: ']]'
 
   dockerExecuteOnKubernetes:
     verbose: true

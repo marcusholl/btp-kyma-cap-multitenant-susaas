@@ -59,7 +59,6 @@ steps:
   kubernetesDeploy:
     additionalParameters:
       - --debug
-      - --set global.imagePullSecret.name=concise
     deployTool: helm3
     deploymentName: mh-deployment-01
     containerRegistryUrl: https://concise.common.repositories.cloud.sap
@@ -68,6 +67,7 @@ steps:
     stashContent:
       - source
       - charts
+
     verbose: true
     namespace: mh-01
     helmDeployWaitSeconds: 60
@@ -78,6 +78,7 @@ steps:
       srv.image.tag:           image.susaas_images/susaas_srv.tag
       broker.image.repository: image.susaas_image/broker.repository
       broker.image.tag:        image.susaas_image/broker.tag
+      global.imagePullSecret.name: imagePullSecrets[0].name
 
   helmExecute:
     helmCommand: dependency

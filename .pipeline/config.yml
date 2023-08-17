@@ -70,8 +70,9 @@ steps:
     # materialized earlier by a helm dependency update. There are currently these related PRs:
     # - https://github.com/SAP/jenkins-library/pull/4512 With that the chart dependencies are retrieved inside kubernetesDeploy.
     #   With that the "charts" stash is not required anymore.
-    # - other PR for creating the charts stash not provided yet.
-    # Other option would be to create the chart-stash in our pipeline (... and not inside any piper stage).
+    # - https://github.com/SAP/jenkins-library/pull/4519 With that the chart dependencies are retrieved inside the stages prio to
+    #   invoking the kubernetesDeploy-step.
+    # Other option would be to create the chart-stash in our pipeline (... and not inside piper-os).
     # 
     stashContent:
       - source

@@ -38,7 +38,9 @@ steps:
 
   # cnbBuild config
   cnbBuild:
+    # this refers to a docker config which is used for deploying into the docker registry (deploy credentials)
     dockerConfigJsonCredentialsId: docker-config
+    # the docker registry where we would like to deploy to
     containerRegistryUrl: concise.common.repositories.cloud.sap
     multipleImages:
       - path: gen/srv
@@ -49,20 +51,34 @@ steps:
         containerImageName: susaas-image/broker
       - path: gen/db-com
         containerImageName: susaas-image/db-com
-
+    # no containerImageTag, this means a guid prepared by artifactSetVersion will be used
   # kubernetesDeploy config
   kubernetesDeploy:
     additionalParameters:
+      # we should keep the debug flag. Otherwise there is not much written to the log during deployment. That look like we are stuck.
       - --debug
       - --set
       - global.imagePullSecret.name=concise
+    # deploy tool is used for resolving the deploy tool and a corresponding docker image, in our case dtzar/helm-kubectl:3
     deployTool: helm3
     deploymentName: mh-deployment-01
     containerRegistryUrl: https://concise.common.repositories.cloud.sap
+    # the kube config file for the k8s system where we would like to deploy to
     kubeConfigFileCredentialsId: kube-config
+    # The source stash is required for the deployment (... values.yaml, Chart.yaml)
+    # the charts stash is not a piper stash, but provided by us. It should provide the chart dependencies from outside
+    # materialized earlier by a helm dependency update. There are currently these related PRs:
+    # - https://github.com/SAP/jenkins-library/pull/4512 With that the chart dependencies are retrieved inside kubernetesDeploy.
+    #   With that the "charts" stash is not required anymore.
+    # - other PR for creating the charts stash not provided yet.
+    # Other option would be to create the chart-stash in our pipeline (... and not inside any piper stage).
+    # 
     stashContent:
+      - source
       - charts
+    # maybe the verbosity flag could be omitted
     verbose: true
+    # the namespace where we deploy into
     namespace: mh-01
     helmDeployWaitSeconds: 60
     valuesMapping:
@@ -74,8 +90,11 @@ steps:
       broker.image.tag:        image.susaas_image/broker.tag
 
   helmExecute:
+    # the template delimeters here are a workaround. We are forced to use a values.yaml-preprocessing which fails in our
+    # case when we have the defaults ( {{}} ). There is this PR: https://github.com/SAP/jenkins-library/pull/4511 for opting-out from the preprocessing
     templateStartDelimiter: '[['
     templateEndDelimiter: ']]'
 
   dockerExecuteOnKubernetes:
+    # should be removed finally
     verbose: true

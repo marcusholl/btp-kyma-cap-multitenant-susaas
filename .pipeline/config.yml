@@ -61,7 +61,6 @@ steps:
     deploymentName: mh-deployment-01
     containerRegistryUrl: https://concise.common.repositories.cloud.sap
     kubeConfigFileCredentialsId: kube-config
-    containerRegistrySecret: concise
     stashContent:
       - source
       - charts

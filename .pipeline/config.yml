@@ -1,6 +1,7 @@
 ---
 general:
   buildTool: "npm"
+  containerRegistryUrl: https://concise.common.repositories.cloud.sap
 service:
   buildToolVersion: "N18"
 stages:
@@ -43,7 +44,6 @@ steps:
     # this refers to a docker config which is used for deploying into the docker registry (deploy credentials)
     dockerConfigJsonCredentialsId: docker-config
     # the docker registry where we would like to deploy to
-    containerRegistryUrl: https://concise.common.repositories.cloud.sap
     multipleImages:
       - path: gen/srv
         containerImageName: susaas-images/susaas-srv
@@ -64,7 +64,6 @@ steps:
     # deploy tool is used for resolving the deploy tool and a corresponding docker image, in our case dtzar/helm-kubectl:3
     deployTool: helm3
     deploymentName: mh-deployment-01
-    containerRegistryUrl: https://concise.common.repositories.cloud.sap
     # the kube config file for the k8s system where we would like to deploy to
     kubeConfigFileCredentialsId: kube-config
     # The source stash is required for the deployment (... values.yaml, Chart.yaml)

@@ -78,6 +78,7 @@ steps:
     # 
     stashContent:
       - source
+      - charts
     # maybe the verbosity flag could be omitted
     verbose: true
     # the namespace where we deploy into

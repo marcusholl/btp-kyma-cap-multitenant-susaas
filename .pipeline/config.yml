@@ -76,8 +76,6 @@ steps:
       broker.image.tag:        image.susaas_image/broker.tag
 
   helmExecute:
-    helmCommand: dependency
-    dependency: update
     templateStartDelimiter: '[['
     templateEndDelimiter: ']]'
 

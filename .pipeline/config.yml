@@ -18,6 +18,8 @@ stages:
     cloudFoundryDeploy: false
     tmsUpload: false
     kubernetesDeploy: true
+    # in case we have a deployment also in the acceptance stage we should provide the chartPath in the general
+    # section so that it is shared between the stages
     chartPath: charts/sustainable-saas
 steps:
   artifactPrepareVersion:

@@ -2,7 +2,6 @@
 general:
   buildTool: "npm"
   containerRegistryUrl: https://concise.common.repositories.cloud.sap
-  chartPath: charts/sustainable-saas
 service:
   buildToolVersion: "N18"
 stages:
@@ -20,6 +19,9 @@ stages:
     cloudFoundryDeploy: false
     tmsUpload: false
     kubernetesDeploy: true
+    # in case we have a deployment also in the acceptance stage we should provide the chartPath in the general
+    # section so that it is shared between the stages
+    chartPath: charts/sustainable-saas
 steps:
   artifactPrepareVersion:
     versioningType: "cloud_noTag"
@@ -100,6 +102,7 @@ steps:
     dependency: update
     stashContent:
       - source
+    chartPath: charts/sustainable-saas
     templateStartDelimiter: '[['
     templateEndDelimiter: ']]'
 

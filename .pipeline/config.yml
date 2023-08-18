@@ -37,7 +37,10 @@ steps:
 
   pipelineStashFilesAfterBuild:
     stashIncludes:
-      # should be more finegrain finally
+      # should be more finegrain finally, the important thing is that the chart dependencies needs to be contained
+      # in this stash (**/charts/*.tgz). The build results stash is handed over to kubernetesDeploy. Inside
+      # kubernetesDeploy we need the templates, value files and the charts. Everything but the chart dependencies
+      # is already contained in the source stash
       buildResult: '**/*'
 
   # cnbBuild config

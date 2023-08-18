@@ -2,6 +2,10 @@
 general:
   buildTool: "npm"
   containerRegistryUrl: https://concise.common.repositories.cloud.sap
+  # this does not work currently since GENERAL was not provided for the chartPath
+  # I guess this will start working when we have a pipeline go released which
+  # accespt the chartPath in general
+  chartPath: charts/sustainable-saas
 service:
   buildToolVersion: "N18"
 stages:
@@ -21,6 +25,7 @@ stages:
     kubernetesDeploy: true
     # in case we have a deployment also in the acceptance stage we should provide the chartPath in the general
     # section so that it is shared between the stages
+    # ... does not work with the general section at the moment since we do not have a corresponding piper-go version
     chartPath: charts/sustainable-saas
 steps:
   artifactPrepareVersion:
@@ -102,6 +107,8 @@ steps:
     dependency: update
     stashContent:
       - source
+    # should be provided finally in the general section in order not to have the twice. Does not work at the moment
+    # since chartPath is not / was not labeled with GENERAL
     chartPath: charts/sustainable-saas
     templateStartDelimiter: '[['
     templateEndDelimiter: ']]'

@@ -37,6 +37,7 @@ steps:
 
   pipelineStashFilesAfterBuild:
     stashIncludes:
+      # should be more finegrain finally
       buildResult: '**/*'
 
   # cnbBuild config
@@ -77,7 +78,7 @@ steps:
     # 
     stashContent:
       - source
-      - charts
+      - buildResult
     # maybe the verbosity flag could be omitted
     verbose: true
     # the namespace where we deploy into

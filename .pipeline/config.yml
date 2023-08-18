@@ -102,6 +102,7 @@ steps:
     dependency: update
     stashContent:
       - source
+    chartPath: charts/sustainable-saas
     templateStartDelimiter: '[['
     templateEndDelimiter: ']]'
 

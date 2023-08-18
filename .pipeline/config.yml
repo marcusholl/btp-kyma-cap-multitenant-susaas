@@ -98,6 +98,8 @@ steps:
   helmExecute:
     # the template delimeters here are a workaround. We are forced to use a values.yaml-preprocessing which fails in our
     # case when we have the defaults ( {{}} ). There is this PR: https://github.com/SAP/jenkins-library/pull/4511 for opting-out from the preprocessing
+    helmCommand: dependency
+    dependency: update
     templateStartDelimiter: '[['
     templateEndDelimiter: ']]'
 

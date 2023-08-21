@@ -143,7 +143,7 @@ broker:
       serviceInstanceName: xsuaa-api
   image:
     # Provide your API Service Broker Docker Image repository
-    repository: concise.common.repositories.cloud.sap/susaas-images/susaas-broker
+    repository: concise.common.repositories.cloud.sap/susaas-images/broker
     tag: latest
   resources:
     limits:
@@ -203,7 +203,7 @@ html5_apps_deployer:
   cloudService: susaas
   image:
     # Provide your HTML5 Apps Deployer Docker Image repository
-    repository: concise.common.repositories.cloud.sap/susaas-images/susaas-html5-deployer
+    repository: concise.common.repositories.cloud.sap/susaas-images/html5-deployer
     tag: latest
   bindings:
     html5-apps-repo:

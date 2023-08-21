@@ -29,7 +29,7 @@ router:
       serviceInstanceName: html5-repo-runtime
   image:
     # Provide your Application Router Docker Image repository
-    repository: concise.common.repositories.cloud.sap/susaas-images/susaas-router
+    repository: concise.common.repositories.cloud.sap/susaas-images/router
     tag: latest
   resources:
     limits:

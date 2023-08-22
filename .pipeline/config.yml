@@ -57,11 +57,11 @@ steps:
       - path: gen/srv
         containerImageName: susaas-images/susaas-srv
       - path: gen/api
-        containerImageName: susaas-image/usaas-api
+        containerImageName: susaas-image/susaas-api
       - path: broker
         containerImageName: susaas-image/broker
       - path: gen/db-com
-        containerImageName: susaas-image/db-com
+        containerImageName: susaas-image/susaas-db-com
     # no containerImageTag, this means a guid prepared by artifactSetVersion will be used
   # kubernetesDeploy config
   kubernetesDeploy:
@@ -93,8 +93,8 @@ steps:
     namespace: mh-01
     helmDeployWaitSeconds: 300
     valuesMapping:
-      api.image.repository:    image.susaas_image/usaas_api.repository
-      api.image.tag:           image.susaas_image/usaas_api.tag
+      api.image.repository:    image.susaas_image/susaas_api.repository
+      api.image.tag:           image.susaas_image/susaas_api.tag
       srv.image.repository:    image.susaas_images/susaas_srv.repository
       srv.image.tag:           image.susaas_images/susaas_srv.tag
       broker.image.repository: image.susaas_image/broker.repository

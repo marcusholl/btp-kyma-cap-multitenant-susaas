@@ -65,6 +65,7 @@ steps:
     # no containerImageTag, this means a guid prepared by artifactSetVersion will be used
   # kubernetesDeploy config
   kubernetesDeploy:
+    forceUpdates: false
     additionalParameters:
       # we should keep the debug flag. Otherwise there is not much written to the log during deployment. That look like we are stuck.
       - --debug

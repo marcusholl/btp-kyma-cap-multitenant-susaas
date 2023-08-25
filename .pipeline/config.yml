@@ -17,6 +17,8 @@ stages:
   Acceptance:
     cloudFoundryDeploy: false
     npmExecuteEndToEndTests: false
+    kubernetesDeploy: false
+    # this is where the configuration would go for a kubernetesDeploy during the Acceptance stage
   Compliance:
     sonarExecuteScan: false
   Release:

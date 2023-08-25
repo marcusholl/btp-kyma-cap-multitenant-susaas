@@ -2,7 +2,10 @@
 general:
   buildTool: "npm"
   containerRegistryUrl: https://concise.common.repositories.cloud.sap
-  # chartPath: charts/sustainable-saas
+  # this does not work currently since GENERAL was not provided for the chartPath
+  # I guess this will start working when we have a pipeline go released which
+  # accespt the chartPath in general
+#  chartPath: charts/sustainable-saas
 service:
   buildToolVersion: "N18"
 stages:
@@ -14,42 +17,58 @@ stages:
   Acceptance:
     cloudFoundryDeploy: false
     npmExecuteEndToEndTests: false
-    kubernetesDeploy: false
-    chartPath: charts/sustainable-saas
   Compliance:
     sonarExecuteScan: false
   Release:
     cloudFoundryDeploy: false
     tmsUpload: false
     kubernetesDeploy: true
+    # in case we have a deployment also in the acceptance stage we should provide the chartPath in the general
+    # section so that it is shared between the stages
+    # ... does not work with the general section at the moment since we do not have a corresponding piper-go version
     chartPath: charts/sustainable-saas
     forceUpdates: false # custom defaults
     additionalParameters:
+      # we should keep the debug flag. Otherwise there is not much written to the log during deployment. That look like we are stuck.
       - --debug
       - --set
       - global.imagePullSecret.name=concise
+    # deploy tool is used for resolving the deploy tool and a corresponding docker image, in our case dtzar/helm-kubectl:3
     deployTool: helm3
     deploymentName: mh-deployment-01
+    # the kube config file for the k8s system where we would like to deploy to
     kubeConfigFileCredentialsId: kube-config
+    # The source stash is required for the deployment (... values.yaml, Chart.yaml)
+    # the charts stash is not a piper stash, but provided by us. It should provide the chart dependencies from outside
+    # materialized earlier by a helm dependency update. There are currently these related PRs:
+    # - https://github.com/SAP/jenkins-library/pull/4512 With that the chart dependencies are retrieved inside kubernetesDeploy.
+    #   With that the "charts" stash is not required anymore.
+    # - https://github.com/SAP/jenkins-library/pull/4519 With that the chart dependencies are retrieved inside the stages prio to
+    #   invoking the kubernetesDeploy-step.
+    # Other option would be to create the chart-stash in our pipeline (... and not inside piper-os).
+    #
     stashContent:
       - source
       - buildResult
+    # maybe the verbosity flag could be omitted
     verbose: true
+    # the namespace where we deploy into
     namespace: mh-01
     helmDeployWaitSeconds: 300
     valuesMapping:
-      api.image.repository:    image.susaas_image/susaas_api.repository
-      api.image.tag:           image.susaas_image/susaas_api.tag
-      srv.image.repository:    image.susaas_images/susaas_srv.repository
-      srv.image.tag:           image.susaas_images/susaas_srv.tag
+      api.image.repository: image.susaas_image/susaas_api.repository
+      api.image.tag: image.susaas_image/susaas_api.tag
+      srv.image.repository: image.susaas_images/susaas_srv.repository
+      srv.image.tag: image.susaas_images/susaas_srv.tag
       broker.image.repository: image.susaas_image/broker.repository
-      broker.image.tag:        image.susaas_image/broker.tag
+      broker.image.tag: image.susaas_image/broker.tag
 steps:
   artifactPrepareVersion:
     versioningType: "cloud_noTag"
   cloudFoundryDeploy:
     mtaDeployParameters: "-f --version-rule ALL"
 
+  # custom additions to make nom build work
   buildExecute:
     npmRunScripts: [ 'cds-build' ]
     npmInstall: false
@@ -58,10 +77,17 @@ steps:
 
   pipelineStashFilesAfterBuild:
     stashIncludes:
+      # should be more finegrain finally, the important thing is that the chart dependencies needs to be contained
+      # in this stash (**/charts/*.tgz). The build results stash is handed over to kubernetesDeploy. Inside
+      # kubernetesDeploy we need the templates, value files and the charts. Everything but the chart dependencies
+      # is already contained in the source stash
       buildResult: '**/*'
 
+  # cnbBuild config
   cnbBuild:
+    # this refers to a docker config which is used for deploying into the docker registry (deploy credentials)
     dockerConfigJsonCredentialsId: docker-config
+    # the docker registry where we would like to deploy to
     multipleImages:
       - path: gen/srv
         containerImageName: susaas-images/susaas-srv
@@ -71,6 +97,7 @@ steps:
         containerImageName: susaas-image/broker
       - path: gen/db-com
         containerImageName: susaas-image/susaas-db-com
+    # no containerImageTag, this means a guid prepared by artifactSetVersion will be used
 
   helmExecute:
     # the template delimeters here are a workaround. We are forced to use a values.yaml-preprocessing which fails in our

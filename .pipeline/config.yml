@@ -25,13 +25,13 @@ stages:
     kubernetesDeploy: true
     # the chartPath will be moved to general once piper PRs are merged
     chartPath: charts/sustainable-saas
-
+    # here is the configuration for a kubernetesDeploy during the Release stage
     additionalParameters:
       # we should keep the debug flag. Otherwise there is not much written to the log during deployment. That look like we are stuck.
       - --debug
       - --set
       - global.imagePullSecret.name=concise
-    # we will currently only offer helm3, not kubectl deployTool
+    # we will currently only offer helm3, not kubectl deployTool. So this is static.
     deployTool: helm3
     deploymentName: mh-deployment-01
     kubeConfigFileCredentialsId: kube-config
@@ -66,6 +66,7 @@ steps:
     cnbBuild: true
     helmExecute: true
 
+  ## VV PUT THESE INTO CUSTOM DEFAULTS IN PIPELINE-LIB? VV##
   pipelineStashFilesAfterBuild:
     stashIncludes:
       # should be more finegrain finally, the important thing is that the chart dependencies needs to be contained
@@ -73,6 +74,7 @@ steps:
       # kubernetesDeploy we need the templates, value files and the charts. Everything but the chart dependencies
       # is already contained in the source stash
       buildResult: '**/*'
+  ## ^^ PUT THESE INTO CUSTOM DEFAULTS IN PIPELINE-LIB ^^##
 
   cnbBuild:
     dockerConfigJsonCredentialsId: docker-config
@@ -85,7 +87,7 @@ steps:
         containerImageName: susaas-image/broker
       - path: gen/db-com
         containerImageName: susaas-image/susaas-db-com
-    # containerImageTag is optional. When turned off, this means a guid prepared by artifactSetVersion will be used
+    # containerImageTag is optional. When not provided, this means a guid prepared by artifactSetVersion will be used
 
   helmExecute:
     helmCommand: dependency
@@ -94,10 +96,12 @@ steps:
       - source
     # the chartPath will be moved to general once piper PRs are merged
     chartPath: charts/sustainable-saas
+    ## VV PUT THESE INTO CUSTOM DEFAULTS IN PIPELINE-LIB VV##
     # the template delimeters will be removed once piper PRs are merged. Another flag will take it's place- this can go in custom defaults?
     templateStartDelimiter: '[['
     templateEndDelimiter: ']]'
+    ## ^^ PUT THESE INTO CUSTOM DEFAULTS IN PIPELINE-LIB ^^##
 
   dockerExecuteOnKubernetes:
-    # should be removed for final publish
+    # should be removed for final version
     verbose: true

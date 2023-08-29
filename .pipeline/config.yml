@@ -45,12 +45,12 @@ stages:
     kubeConfigFileCredentialsId: kube-config
     namespace: mh-01
     valuesMapping:
-      api.image.repository: image.susaas_image/susaas_api.repository
-      api.image.tag: image.susaas_image/susaas_api.tag
-      srv.image.repository: image.susaas_images/susaas_srv.repository
-      srv.image.tag: image.susaas_images/susaas_srv.tag
-      broker.image.repository: image.susaas_image/broker.repository
-      broker.image.tag: image.susaas_image/broker.tag
+      api.image.repository: image.susaas_image/susaas-api.repository
+      api.image.tag: image.susaas_image/susaas-api.tag
+      srv.image.repository: image.susaas_images/susaas-srv.repository
+      srv.image.tag: image.susaas_images/susaas-srv.tag
+      broker.image.repository: image.susaas-image/broker.repository
+      broker.image.tag: image.susaas-image/broker.tag
 
 steps:
   # custom additions to make npm build work

@@ -12,7 +12,6 @@ stages:
   Additional Unit Tests:
     npmExecuteScripts: false
   Acceptance:
-    cloudFoundryDeploy: false
     npmExecuteEndToEndTests: false
     kubernetesDeploy: false
     # this is where the configuration would go for a kubernetesDeploy during the Acceptance stage
@@ -34,10 +33,7 @@ stages:
   Compliance:
     sonarExecuteScan: false
   Release:
-    cloudFoundryDeploy: false
-    tmsUpload: false
     kubernetesDeploy: true
-    # here is the configuration for a kubernetesDeploy during the Release stage
     additionalParameters:
       # we should keep the debug flag. Otherwise there is not much written to the log during deployment. That look like we are stuck.
       - --debug
@@ -56,37 +52,13 @@ stages:
       broker.image.repository: image.susaas_image/broker.repository
       broker.image.tag: image.susaas_image/broker.tag
 
-    ## VV PUT THESE INTO CUSTOM DEFAULTS IN PIPELINE-LIB VV##
-    # The source stash is required for the deployment (... values.yaml, Chart.yaml)
-    # the build result stash should have the updated chart dependencies
-    forceUpdates: false # custom defaults
-    stashContent: # custom defaults
-      - source # custom defaults
-      - buildResult # custom defaults
-    ## ^^ PUT THESE INTO CUSTOM DEFAULTS IN PIPELINE-LIB ^^##
-
 steps:
-  artifactPrepareVersion:
-    versioningType: "cloud_noTag"
-  cloudFoundryDeploy:
-    mtaDeployParameters: "-f --version-rule ALL"
-
   # custom additions to make npm build work
   buildExecute:
     npmRunScripts: [ 'cds-build' ]
     npmInstall: false
     cnbBuild: true
     helmExecute: true
-
-  ## VV PUT THESE INTO CUSTOM DEFAULTS IN PIPELINE-LIB? VV##
-  pipelineStashFilesAfterBuild:
-    stashIncludes:
-      # should be more finegrain finally, the important thing is that the chart dependencies needs to be contained
-      # in this stash (**/charts/*.tgz). The build results stash is handed over to kubernetesDeploy. Inside
-      # kubernetesDeploy we need the templates, value files and the charts. Everything but the chart dependencies
-      # is already contained in the source stash
-      buildResult: '**/*'
-  ## ^^ PUT THESE INTO CUSTOM DEFAULTS IN PIPELINE-LIB ^^##
 
   cnbBuild:
     dockerConfigJsonCredentialsId: docker-config
@@ -104,11 +76,6 @@ steps:
   helmExecute:
     helmCommand: dependency
     dependency: update
-    ## VV PUT THESE INTO CUSTOM DEFAULTS IN PIPELINE-LIB? VV##
-    stashContent:
-      - source
-    renderValuesTemplate: false
-    ## ^^ PUT THESE INTO CUSTOM DEFAULTS IN PIPELINE-LIB ^^##
 
   dockerExecuteOnKubernetes:
     # should be removed for final version

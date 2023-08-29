@@ -2,8 +2,7 @@
 general:
   buildTool: "npm"
   containerRegistryUrl: https://concise.common.repositories.cloud.sap
-  # the chartPath will be activated in general once piper PRs are merged
-#  chartPath: charts/sustainable-saas
+  chartPath: charts/sustainable-saas
 service:
   buildToolVersion: "N18"
 stages:
@@ -17,7 +16,6 @@ stages:
     npmExecuteEndToEndTests: false
     kubernetesDeploy: false
     # this is where the configuration would go for a kubernetesDeploy during the Acceptance stage
-#    chartPath: charts/sustainable-saas
 #    additionalParameters:
 #      - --debug
 #      - --set
@@ -39,8 +37,6 @@ stages:
     cloudFoundryDeploy: false
     tmsUpload: false
     kubernetesDeploy: true
-    # the chartPath will be moved to general once piper PRs are merged
-    chartPath: charts/sustainable-saas
     # here is the configuration for a kubernetesDeploy during the Release stage
     additionalParameters:
       # we should keep the debug flag. Otherwise there is not much written to the log during deployment. That look like we are stuck.
@@ -108,14 +104,10 @@ steps:
   helmExecute:
     helmCommand: dependency
     dependency: update
+    ## VV PUT THESE INTO CUSTOM DEFAULTS IN PIPELINE-LIB? VV##
     stashContent:
       - source
-    # the chartPath will be moved to general once piper PRs are merged
-    chartPath: charts/sustainable-saas
-    ## VV PUT THESE INTO CUSTOM DEFAULTS IN PIPELINE-LIB VV##
-    # the template delimeters will be removed once piper PRs are merged. Another flag will take it's place- this can go in custom defaults?
-    templateStartDelimiter: '[['
-    templateEndDelimiter: ']]'
+    renderValuesTemplate: false
     ## ^^ PUT THESE INTO CUSTOM DEFAULTS IN PIPELINE-LIB ^^##
 
   dockerExecuteOnKubernetes:

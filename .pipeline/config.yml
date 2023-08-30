@@ -41,14 +41,14 @@ stages:
       - global.imagePullSecret.name=concise
     # we will currently only offer helm3, not kubectl deployTool. So this is static.
     deployTool: helm3
-    deploymentName: mh-deployment-02
+    deploymentName: mh-deployment-03
     kubeConfigFileCredentialsId: kube-config
     namespace: mh-01
     valuesMapping:
-      api.image.repository: image.susaas_image/susaas-api.repository
-      api.image.tag: image.susaas_image/susaas-api.tag
-      srv.image.repository: image.susaas_images/susaas-srv.repository
-      srv.image.tag: image.susaas_images/susaas-srv.tag
+      api.image.repository: image.susaas-image/susaas-api.repository
+      api.image.tag: image.susaas-image/susaas-api.tag
+      srv.image.repository: image.susaas-images/susaas-srv.repository
+      srv.image.tag: image.susaas-images/susaas-srv.tag
       broker.image.repository: image.susaas-image/broker.repository
       broker.image.tag: image.susaas-image/broker.tag
 

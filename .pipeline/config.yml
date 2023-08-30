@@ -41,7 +41,7 @@ stages:
       - global.imagePullSecret.name=concise
     # we will currently only offer helm3, not kubectl deployTool. So this is static.
     deployTool: helm3
-    deploymentName: mh-deployment-03
+    deploymentName: mh-deployment-01
     kubeConfigFileCredentialsId: kube-config
     namespace: mh-01
     valuesMapping:

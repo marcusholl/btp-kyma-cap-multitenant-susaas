@@ -23,13 +23,6 @@ stages:
 #    deploymentName: mh-deployment-01
 #    kubeConfigFileCredentialsId: kube-config
 #    namespace: mh-01
-#    valuesMapping:
-#      api.image.repository: image.susaas_image/susaas_api.repository
-#      api.image.tag: image.susaas_image/susaas_api.tag
-#      srv.image.repository: image.susaas_images/susaas_srv.repository
-#      srv.image.tag: image.susaas_images/susaas_srv.tag
-#      broker.image.repository: image.susaas_image/broker.repository
-#      broker.image.tag: image.susaas_image/broker.tag
   Compliance:
     sonarExecuteScan: false
   Release:
@@ -44,13 +37,6 @@ stages:
     deploymentName: mh-deployment-01
     kubeConfigFileCredentialsId: kube-config
     namespace: mh-01
-    valuesMapping:
-      api.image.repository: image.susaas-image/susaas-api.repository
-      api.image.tag: image.susaas-image/susaas-api.tag
-      srv.image.repository: image.susaas-images/susaas-srv.repository
-      srv.image.tag: image.susaas-images/susaas-srv.tag
-      broker.image.repository: image.susaas-image/broker.repository
-      broker.image.tag: image.susaas-image/broker.tag
 
 steps:
   # custom additions to make npm build work
@@ -58,7 +44,6 @@ steps:
     npmRunScripts: [ 'cds-build' ]
     npmInstall: false
     cnbBuild: true
-    helmExecute: true
 
   cnbBuild:
     dockerConfigJsonCredentialsId: docker-config
@@ -76,6 +61,15 @@ steps:
   helmExecute:
     helmCommand: dependency
     dependency: update
+
+  kubernetesDeploy:
+    valuesMapping:
+      api.image.repository: image.susaas-image/susaas-api.repository
+      api.image.tag: image.susaas-image/susaas-api.tag
+      srv.image.repository: image.susaas-images/susaas-srv.repository
+      srv.image.tag: image.susaas-images/susaas-srv.tag
+      broker.image.repository: image.susaas-image/broker.repository
+      broker.image.tag: image.susaas-image/broker.tag
 
   dockerExecuteOnKubernetes:
     # should be removed for final version

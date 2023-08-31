@@ -44,6 +44,7 @@ steps:
     npmRunScripts: [ 'cds-build' ]
     npmInstall: false
     cnbBuild: true
+    helmExecute: true
 
   cnbBuild:
     dockerConfigJsonCredentialsId: docker-config

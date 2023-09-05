@@ -52,7 +52,7 @@ steps:
       - path: gen/srv
         containerImageName: susaas-image/susaas_srv
       - path: gen/api
-        containerImageName: susaas-image/susaas-api
+        containerImageName: susaas-image/susaas.api
       - path: broker
         containerImageName: susaas-image/broker
       - path: gen/db-com
@@ -65,8 +65,8 @@ steps:
 
   kubernetesDeploy:
     valuesMapping:
-      api.image.repository: image.susaas-image/susaas-api.repository
-      api.image.tag: image.susaas-image/susaas-api.tag
+      api.image.repository: image.susaas-image/susaas.api.repository
+      api.image.tag: image.susaas-image/susaas.api.tag
       srv.image.repository: image.susaas-image/susaas_srv.repository
       srv.image.tag: image.susaas-image/susaas_srv.tag
       broker.image.repository: image.susaas-image/broker.repository

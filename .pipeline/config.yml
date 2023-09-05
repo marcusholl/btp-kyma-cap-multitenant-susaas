@@ -42,7 +42,7 @@ steps:
   buildExecute:
     npmRunScripts: [ 'cds-build' ]
     npmInstall: false
-    cnbBuild: false
+    cnbBuild: true
     helmExecute: true
 
   cnbBuild:

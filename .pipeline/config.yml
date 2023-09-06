@@ -66,6 +66,8 @@ steps:
   helmExecute:
     helmCommand: dependency
     dependency: update
+    templateStartDelimiter: '[['
+    templateEndDelimiter: ']]'
 
   kubernetesDeploy:
     valuesMapping:

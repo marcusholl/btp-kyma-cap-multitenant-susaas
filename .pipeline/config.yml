@@ -68,6 +68,7 @@ steps:
     dependency: update
     templateStartDelimiter: '[['
     templateEndDelimiter: ']]'
+    chartPath: charts/sustainable-saas
 
   kubernetesDeploy:
     valuesMapping:

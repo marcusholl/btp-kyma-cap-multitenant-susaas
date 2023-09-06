@@ -79,6 +79,17 @@ steps:
   pipelineStashFilesAfterBuild:
     stashIncludes:
       buildResult: '**/*'
+      checkmarx: '**/*.js, **/*.scala, **/*.py, **/*.go, **/*.d, **/*.di, **/*.xml, **/*.html, **/*.ts'
+      checkmarxOne: '**/*.js, **/*.scala, **/*.py, **/*.go, **/*.d, **/*.di, **/*.xml, **/*.html, **/*.ts'
+      classFiles: '**/target/classes/**/*.class, **/target/test-classes/**/*.class'
+      sonar: '**/jacoco*.exec, **/sonar-project.properties'
+    stashExcludes:
+      buildResult: ''
+      checkmarx: '**/*.mockserver.js, node_modules/**/*.js'
+      checkmarxOne: '**/*.mockserver.js, node_modules/**/*.js'
+      classFiles: ''
+      sonar: ''
+    noDefaultExludes: []
 
   dockerExecuteOnKubernetes:
     # should be removed for final version

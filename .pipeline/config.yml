@@ -9,6 +9,8 @@ stages:
   Build:
     mavenExecuteStaticCodeChecks: false
     npmExecuteLint: false
+  cnbBuild:
+    stashContent: [ "buildResult" ]
   Additional Unit Tests:
     npmExecuteScripts: false
   Acceptance:

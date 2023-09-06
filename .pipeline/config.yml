@@ -50,13 +50,17 @@ steps:
     dockerConfigJsonCredentialsId: docker-config
     multipleImages:
       - path: gen/srv
-        containerImageName: susaas-images/susaas-srv
+        containerImageName: susaas.images/susaas.srv
+        containerImageAlias: susaas-images/susaas-srv
       - path: gen/api
-        containerImageName: susaas-image/susaas-api
+        containerImageName: susaas.image/susaas.api
+        containerImageAlias: susaas-image/susaas-api
       - path: broker
-        containerImageName: susaas-image/broker
+        containerImageName: susaas.image/broker
+        containerImageAlias: susaas-image/broker
       - path: gen/db-com
-        containerImageName: susaas-image/susaas-db-com
+        containerImageName: susaas.image/susaas.db.com
+        containerImageAlias: susaas-image/susaas-db-com
     # containerImageTag is optional. When not provided, this means a guid prepared by artifactSetVersion will be used
 
   helmExecute:

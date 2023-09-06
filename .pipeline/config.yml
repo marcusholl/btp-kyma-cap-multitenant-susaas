@@ -72,7 +72,7 @@ steps:
       api.image.repository: image.susaas_image/susaas_api.repository
       api.image.tag: image.susaas_image/susaas_api.tag
       srv.image.repository: image.susaas_image/susaas_srv.repository
-      srv.image.tag: image.susaas-image/susaas-srv.tag
+      srv.image.tag: image.susaas_image/susaas_srv.tag
       broker.image.repository: image.susaas_image/broker.repository
       broker.image.tag: image.susaas_image/broker.tag
 

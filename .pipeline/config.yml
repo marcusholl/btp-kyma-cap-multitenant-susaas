@@ -77,7 +77,8 @@ steps:
       broker.image.tag: image.susaas_image/broker.tag
 
   pipelineStashFilesAfterBuild:
-    buildResult: '**/*'
+    stashIncludes:
+      buildResult: '**/*'
 
   dockerExecuteOnKubernetes:
     # should be removed for final version

@@ -50,8 +50,8 @@ steps:
     dockerConfigJsonCredentialsId: docker-config
     multipleImages:
       - path: gen/srv
-        containerImageName: susaas.images/susaas.srv
-        containerImageAlias: susaas_images/susaas_srv
+        containerImageName: susaas.image/susaas.srv
+        containerImageAlias: susaas_image/susaas_srv
       - path: gen/api
         containerImageName: susaas.image/susaas.api
         containerImageAlias: susaas_image/susaas_api
@@ -72,7 +72,7 @@ steps:
       api.image.repository: image.susaas_image/susaas_api.repository
       api.image.tag: image.susaas_image/susaas_api.tag
       srv.image.repository: image.susaas_images/susaas_srv.repository
-      srv.image.tag: image.susaas-images/susaas-srv.tag
+      srv.image.tag: image.susaas-image/susaas-srv.tag
       broker.image.repository: image.susaas_image/broker.repository
       broker.image.tag: image.susaas-image/broker.tag
 

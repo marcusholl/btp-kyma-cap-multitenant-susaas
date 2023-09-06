@@ -71,6 +71,7 @@ steps:
     chartPath: charts/sustainable-saas
 
   kubernetesDeploy:
+    chartPath: charts/sustainable-saas
     valuesMapping:
       api.image.repository: image.susaas_image/susaas_api.repository
       api.image.tag: image.susaas_image/susaas_api.tag

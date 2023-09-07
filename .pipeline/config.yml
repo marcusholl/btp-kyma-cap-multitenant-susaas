@@ -64,14 +64,12 @@ steps:
     # containerImageTag is optional. When not provided, this means a guid prepared by artifactSetVersion will be used
 
   helmExecute:
-    chartPath: charts/sustainable-saas
     helmCommand: dependency
     dependency: update
     templateStartDelimiter: '[['
     templateEndDelimiter: ']]'
 
   kubernetesDeploy:
-    chartPath: charts/sustainable-saas
     valuesMapping:
       api.image.repository: image.susaas_image/susaas_api.repository
       api.image.tag: image.susaas_image/susaas_api.tag
